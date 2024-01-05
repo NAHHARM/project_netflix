@@ -12,9 +12,10 @@ netflix_movies= netflix_subset[["title","country","genre","release_year","durati
 short_movies= netflix_movies[netflix_movies["duration"]<60]
 
 # ITERATE
+
 colors=[]
 
-for x,y in short_movies.iterrows():
+for x,y in netflix_movies.iterrows():
     if y["genre"]=="Children":
        colors.append("green")
     elif   y["genre"]=="Documentaries":
@@ -23,7 +24,17 @@ for x,y in short_movies.iterrows():
        colors.append("yellow")
     else: 
         colors.append("black") 
-print(colors[:20])          
+print(colors[:10])   
+
+# Plot
+fig= plt.figure(figsize=(12,8))
+plt.scatter(netflix_movies.release_year,netflix_movies.duration,c=colors)
+plt.xlabel("Release year")
+plt.ylabel("Duration (min)")
+plt.title("Movie Duration by Year of Release")
+plt.show()
+
+
 
 
 
